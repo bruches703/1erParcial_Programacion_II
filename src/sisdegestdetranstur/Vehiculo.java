@@ -9,10 +9,10 @@ package sisdegestdetranstur;
  * @author bruch
  */
 public abstract class Vehiculo {
-    private String patente;
-    private String marca;
-    private int capacidadPasajeros;
-    private int anioFabricacion;
+    protected String patente;
+    protected String marca;
+    protected int capacidadPasajeros;
+    protected int anioFabricacion;
 
     public Vehiculo(String patente, String marca, int capacidadPasajeros, int anioFabricacion) {
         this.patente = patente;
@@ -54,5 +54,6 @@ public abstract class Vehiculo {
     }
     //---------------------------------------------
     
+    public abstract void mostrarInformacion();
     
 }

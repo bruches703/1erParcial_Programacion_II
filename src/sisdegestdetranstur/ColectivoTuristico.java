@@ -24,6 +24,12 @@ public class ColectivoTuristico extends Vehiculo{
     public void setCantidadPisos(int cantidadPisos) {
         this.cantidadPisos = cantidadPisos;
     }
+
+
+    @Override
+    public void mostrarInformacion() {
+        
+    }
         
     
     
