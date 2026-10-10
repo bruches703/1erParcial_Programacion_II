@@ -28,9 +28,10 @@ public class ColectivoTuristico extends Vehiculo{
 
     @Override
     public void mostrarInformacion() {
-        
+        System.out.printf("Colectivo | Patente: %-8s | Marca: %-10s | Capacidad: %-3d pas. | Año: %-4d | Pisos: %-2d piso/s\n", 
+                this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, this.cantidadPisos);
     }
-        
+         
     
     
 }

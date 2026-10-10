@@ -24,5 +24,16 @@ public class VanEjecutiva extends Vehiculo{
         this.tieneAireAcondicionado = tieneAireAcondicionado;
     }
    
-    
+    @Override
+    public void mostrarInformacion() {
+        String tieneAire;
+        if(this.tieneAireAcondicionado){
+            tieneAire = "SI";
+        } else {
+            tieneAire = "NO";
+        }
+        
+        System.out.printf("Colectivo | Patente: %-8s | Marca: %-10s | Capacidad: %-3d pas. | Año: %-4d | %-2s\n", 
+                this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, tieneAire);
+    }
 }

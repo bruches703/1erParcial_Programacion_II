@@ -20,6 +20,10 @@ public class LanchaTuristica extends Vehiculo {
         return tipoDeCombustible;
     }
     
-    
+    @Override
+    public void mostrarInformacion() {
+        System.out.printf("Colectivo | Patente: %-8s | Marca: %-10s | Capacidad: %-3d pas. | Año: %-4d | %-9s\n", 
+                this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, this.tipoDeCombustible);
+    }
     
 }

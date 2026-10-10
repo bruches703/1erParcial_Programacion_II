@@ -6,6 +6,7 @@ package sisdegestdetranstur;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.List;
 /**
  * Clases y funciones que trabajan con consola, ingreso y validaciones
  *
@@ -61,7 +62,7 @@ public class IngresoYValidacion {
                 leer.next(); //limpia el buffer
             }
         }
-
+        leer.nextLine();
         return opcion;
     }
 
@@ -93,6 +94,7 @@ public class IngresoYValidacion {
         String ingreso; // ingreso del usuario a validar
         
         do{
+            leer.next();
             System.out.println(mensaje);
             ingreso = leer.nextLine().toUpperCase();
 
@@ -130,7 +132,7 @@ public class IngresoYValidacion {
         System.out.println(mensajeIngreso);
         cadena = leer.nextLine();
         // Valida el largo de la cadena
-        while (cadena.length() < minLetras && cadena.length() > maxLetras) {
+        while (cadena.length() < minLetras || cadena.length() > maxLetras) {
             System.out.println(mensajeError);
             cadena = leer.nextLine();
         }
@@ -162,7 +164,6 @@ public class IngresoYValidacion {
                 esIngresoValido = esEnteroValido(ingreso, valorMin, valorMax);
                 if (!esIngresoValido) {
                     System.out.println(mensajeError);
-                    leer.next(); //Limpia el buffer
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error, ingrese un valor entero permitido: ");
@@ -219,7 +220,7 @@ public class IngresoYValidacion {
             nuevoVehiculo = (ColectivoTuristico) nuevoVehiculo;
         } else if(opcion == 2){
             TipoDeCombustible combustible = ingresarTipoDeCombustible(leer);
-            nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anioActual);
+            nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anio);
             nuevoVehiculo = (LanchaTuristica) nuevoVehiculo;
         } else {
             boolean tieneAire = ingresarSiNo(leer, "El vehiculo tiene aire acondicionado?\nSi - No: ");
@@ -227,5 +228,11 @@ public class IngresoYValidacion {
             nuevoVehiculo = (VanEjecutiva) nuevoVehiculo;
         }
         return nuevoVehiculo;
+    }
+    
+    public static void mostrarVehiculos(List<Vehiculo> listaVehiculos){
+        for (Vehiculo vehiculo : listaVehiculos) {
+            vehiculo.mostrarInformacion();
+        }
     }
 }
