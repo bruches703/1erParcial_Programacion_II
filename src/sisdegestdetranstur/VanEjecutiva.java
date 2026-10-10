@@ -23,8 +23,6 @@ public class VanEjecutiva extends Vehiculo{
         super(patente, marca, capacidadPasajeros, anioFabricacion);
         this.tieneAireAcondicionado = tieneAireAcondicionado;
     }
-
-
-    
+   
     
 }
