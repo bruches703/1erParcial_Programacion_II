@@ -112,7 +112,6 @@ public class IngresoYValidacion {
         return resultado;
     }
     
-    
     /**
      * Ingresa una cadena de caracteres y la valida devolviendo la cantidad de caracteres
      * buscados en la cadena, limitados por el mínimo y el máximo enviados por
@@ -166,6 +165,7 @@ public class IngresoYValidacion {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error, ingrese un valor entero permitido: ");
+                leer.next();
             }
         }
         leer.nextLine();
@@ -255,7 +255,7 @@ public class IngresoYValidacion {
             System.out.println("Carga de vehiculo exitosa");           
         } else {
             String patente = ingresarPatente(leer);
-            if(estaLaPatenteEnLista(patente, listaVehiculos)){
+            if(Buscadores.estaLaPatenteEnLista(patente, listaVehiculos)){
                 System.out.println("Error, La patente ya se encuentra cargada. Cancelando carga");
             } else {
                 nuevoVehiculo = cargarNuevoVehiculo(leer, opcion, listaVehiculos, patente);
@@ -296,14 +296,7 @@ public class IngresoYValidacion {
         return nuevoVehiculo;
     }
     
-    public static boolean estaLaPatenteEnLista(String patente, List<Vehiculo> listaVehiuculos){
-        for (Vehiculo vehiculo : listaVehiuculos) {
-            if(vehiculo.getPatente().equals(patente)){
-                return true;
-            }
-        }
-        return false;
-    }
+
     
 
 }

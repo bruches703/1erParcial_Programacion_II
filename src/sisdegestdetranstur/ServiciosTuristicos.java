@@ -4,8 +4,10 @@
  */
 package sisdegestdetranstur;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 /**
  *
  * @author bruch
@@ -14,7 +16,7 @@ public class ServiciosTuristicos {
 
     public static void servicioTuristico(List<Vehiculo> listaVehiculos, Scanner leer) {
         boolean esValido = false;
-        List<Vehiculo> listaDeDisponibles = null;
+        List<Vehiculo> listaDeDisponibles = new ArrayList<>();
         if (listaVehiculos.isEmpty()) {
             System.out.println("No hay vehiculos para contratar");
             return;
@@ -26,14 +28,14 @@ public class ServiciosTuristicos {
             String opcion = leer.nextLine().trim().toUpperCase();
             switch (opcion) {
                 case "1", "COLECTIVO" -> {
-                    listaDeDisponibles =  vehiculosParaContratar(listaVehiculos, "COLECTIVO");
+                    listaDeDisponibles = vehiculosParaContratar(listaVehiculos, "COLECTIVO");
                     esValido = true;
                 }
                 case "2", "LANCHA" -> {
                     listaDeDisponibles = vehiculosParaContratar(listaVehiculos, "LANCHA");
                     esValido = true;
                 }
-                case "3", "VAM" -> {
+                case "3", "VAN" -> {
                     listaDeDisponibles = vehiculosParaContratar(listaVehiculos, "VAN");
                     System.out.println("Valor ingresado. Reingrese...");
                 }
@@ -41,17 +43,32 @@ public class ServiciosTuristicos {
         } while (!esValido);
 
         if (!listaDeDisponibles.isEmpty()) {
-            int cantidad = IngresoYValidacion.ingresarEntero(leer, 1, 60, "Ingrese la cantidad de pasajeros: ", "Error de ingreso, el valor no puede ser negativo ni mayor a" + 60);
-            for (Vehiculo vehiculo : listaVehiculos) {
-                if (vehiculo.capacidadPasajeros >= cantidad) {
-                    System.out.println("Vehiculo contratado. Datos del vehiculo");
-                    vehiculo.mostrarInformacion();
-                } else {
-                    System.out.println("No hay vehiculos con la capacidad para este viaje");
-                }
-            }
+            mostrarSevicio(leer, listaDeDisponibles);
         }
 
+    }
+
+    public static void mostrarSevicio(Scanner leer, List<Vehiculo> listaDeDisponibles) {
+        boolean hayVehiculosApto = false;
+        System.out.println("Punto de partida: ");
+        String partida = leer.nextLine();
+        System.out.println("Ingrese destino: ");
+        String destino = leer.nextLine();
+        int cantidadPersonas = IngresoYValidacion.ingresarEntero(leer, 1, 60, "Ingrese la cantidad de pasajeros: ", "Error de ingreso, el valor no puede ser negativo ni mayor a" + 60);
+        for (int i = 0; i < listaDeDisponibles.size(); i++) {
+            if (Buscadores.buscarPorCapacidad(listaDeDisponibles, cantidadPersonas, i) != -1) {
+
+                System.out.println("Vehiculo contratado. Datos del vehiculo");
+                listaDeDisponibles.get(i).mostrarInformacion();
+                System.out.println("Datos de la contratacion: ");
+                System.out.println("Punto de partida: " + partida + "Destino: " + destino + "\nPasajeros: " + cantidadPersonas);
+                hayVehiculosApto = true;
+            }
+
+        }
+        if (!hayVehiculosApto) {
+            System.out.println("No hay vehiculos con suficiente capadidad");
+        }
     }
 
     public static List<Vehiculo> vehiculosParaContratar(List<Vehiculo> listaVehiculos, String opcion) {
@@ -59,12 +76,13 @@ public class ServiciosTuristicos {
             return null;
         }
 
-        List<Vehiculo> vehiculosDisponibles = null;
-        for (Vehiculo vehiculoDisponible : listaVehiculos) {
-            if (vehiculoDisponible.tipoVehiculo.equals(opcion)) {
-                vehiculosDisponibles.add(vehiculoDisponible);
+        List<Vehiculo> vehiculosDisponibles = new ArrayList<>();
+        for (int i = 0; i < listaVehiculos.size(); i++) {
+            if (Buscadores.buscarPorTipoDeVehiculo(listaVehiculos, opcion, i) != 0) {
+                vehiculosDisponibles.add(listaVehiculos.get(i));
             }
         }
         return vehiculosDisponibles;
     }
+
 }

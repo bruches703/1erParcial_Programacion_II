@@ -58,6 +58,16 @@ public abstract class Vehiculo {
     public void setAnioFabricacion(int anioFabricacion) {
         this.anioFabricacion = anioFabricacion;
     }
+
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+    
+    
     //---------------------------------------------
     
     public abstract void mostrarInformacion();

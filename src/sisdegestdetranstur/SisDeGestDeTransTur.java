@@ -21,8 +21,8 @@ public class SisDeGestDeTransTur {
         Scanner leer = new Scanner(System.in);
         List<Vehiculo> listaDeVehiculos = new ArrayList<>();
         listaDeVehiculos.add((ColectivoTuristico) new ColectivoTuristico(2, "ABC123", "FORD", 25, 2020, "COLECTIVO"));
-        listaDeVehiculos.add((VanEjecutiva) new VanEjecutiva(true, "ab123cd", "honda", 15, 2000, "VAN"));
-        listaDeVehiculos.add((LanchaTuristica) new LanchaTuristica(TiposDeMotor.DIESEL, "ir123lo", "yate cojo", 40, 2010, "LANCHA"));
+        listaDeVehiculos.add((VanEjecutiva) new VanEjecutiva(true, "AB123CD", "honda", 15, 2000, "VAN"));
+        listaDeVehiculos.add((LanchaTuristica) new LanchaTuristica(TiposDeMotor.DIESEL, "IR123LO", "yate cojo", 40, 2010, "LANCHA"));
         int opcion;
         //MENU
         do {
@@ -45,18 +45,17 @@ public class SisDeGestDeTransTur {
                     if (listaDeVehiculos.isEmpty()) {
                         System.out.println("\nLista vacia");
                     } else {
-                        System.out.println(" Vehiculo |  Patente  |   Marca    |  Cant. de pasajeros   | Año fab.  | Dato especifico ");
-                        System.out.println("----------|-----------|------------|-----------------------|------------|---------------------");
-                        ImprecionPorConsola.mostrarVehiculos(listaDeVehiculos);
+                        ImprecionPorConsola.mostrarCuadroDeInformacion(listaDeVehiculos);
                     }
-                    System.out.println("Presione una tecla para continuar...");
-                    leer.nextLine();
+
                 }
                 case 3 -> {
                     // Realizar servicio turistico
+                    ServiciosTuristicos.servicioTuristico(listaDeVehiculos, leer);
                 }
                 case 4 -> {
                     // Buscar vehiculo por patente
+                    Buscadores.buscarUnaPatente(leer, listaDeVehiculos);
                 }
                 case 5 -> {
                     // Mostrar vehiculos con capacidad mayor a...
@@ -72,8 +71,13 @@ public class SisDeGestDeTransTur {
                     System.out.println("Saliendo del programa");
                 default -> throw new AssertionError();
             }
+            pausarPantalla(leer);
         } while (opcion != 8);
     }
 
 
+    public static void pausarPantalla(Scanner leer) {
+        System.out.println("Presione una tecla para continuar...");
+        leer.nextLine();
+    }
 }
