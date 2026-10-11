@@ -1,0 +1,85 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>96</x><y>24</y><w>320</w><h>272</h></coordinates><panel_attributes>&lt;&lt;Abstract&gt;&gt; Vehiculo
+--
+#patente:String
+#marca:String
+#capacidadPasajeros:int
+#anioFabricacion:int
+#estaDisponible:boolean:
+#tipoVehiculo:String
+--
++Vehiculo(patente:String, marca:String, capacidadPasajeros:int, anioFabricacion:int)
++setPatente(patente: String) : void
++getPatente() : String
++setMarca(marca:String) : void
++getMarca() : String
++getCapacidadPasajeros(capacidad:int) : void
++setCapacidadPasajeros() : int
++seAnioFabricacion(anio:int) : void
++getAnioFabricacion() : int
++isEstaDisponible():boolean
++setEstaDisponible():void
++getTipoVehiculo():String
+
++mostrarInformacion() : void &lt;&lt;abstract&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>664</y><w>168</w><h>152</h></coordinates><panel_attributes>LanchaTuristica
+--
+-tipoDeMotor(TipoDeCombustible)
+--
++ LanchaTuristica(tipoDemotor : TiposDeMotor, patente : String, marca : String, capacidadPasajeros : int, anioFabricacion : int, tipoVehiculo : String)
++ getTipoDeCombustible() : TiposDeMotor
++ mostrarInformacion() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>352</y><w>168</w><h>136</h></coordinates><panel_attributes>ColectivoTuristico
+--
+-cantidadPisos:int
+--
++ColectivoTuristico(cantidadPisos: int,String,String,int,int,String) 
++getCantidadPisos() : int
++getTipoVehiculo() : String
++setCantidadPisos(cantidadPisos: int) :void
++setTipoVehiculo(tipoVehiculo: String) : void
++mostrarInformacion():void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>512</y><w>168</w><h>144</h></coordinates><panel_attributes>VanEjecutiva
+--
+-aireAcondicionado(boolean)
+--
++ VanEjecutiva(tieneAireAcondicionado : boolean, patente : String, marca : String, capacidadPasajeros : int, anioFabricacion : int, tipoVehiculo : String)
++ isTieneAireAcondicionado() : boolean
++ setTieneAireAcondicionado(tieneAireAcondicionado : boolean) : void
++ mostrarInformacion() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>56</x><y>248</y><w>56</w><h>168</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10;10;190;50;190</additional_attributes></element><element><id>Relation</id><coordinates><x>40</x><y>208</y><w>72</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;10;10;390;70;390</additional_attributes></element><element><id>Relation</id><coordinates><x>24</x><y>168</y><w>88</w><h>520</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10;10;630;90;630</additional_attributes></element><element><id>UMLClass</id><coordinates><x>328</x><y>712</y><w>176</w><h>96</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;TipoDeCombustible
+--
+-NAFTA
+-DIESEL
+-ELECTRICO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>472</x><y>296</y><w>168</w><h>112</h></coordinates><panel_attributes>(main) SisDeGestDeTransTur
+--
++main(String) : void
++pausarPantalla(leer:Scanner):void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>712</x><y>40</y><w>400</w><h>192</h></coordinates><panel_attributes>ImprecionPorConsola
+--
++menu(leer:Scanner):int
++mostrarVehiculos(listaVehiculos:List&lt;Vehiculo&gt; ):void
++mostrarCabeceraDeCuadro():void
++mostrarCuadroDeInformacion(listaDeVehiculos:List&lt;Vehiculo&gt; ):void
++mostrarVehiculosConMayorCapacidad(listaVehiculos:List&lt;Vehiculo&gt;, capacidad:int):void
++mostrarPorAnio(listaVehiculos: List&lt;Vehiculo&gt;):void
++mostrarPorCapacidadDesendente(listaVehiculos: List&lt;Vehiculo&gt; ):void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>896</x><y>536</y><w>392</w><h>176</h></coordinates><panel_attributes>Buscadores
+--
++buscarPorCapacidad(listaVehiculos: List&lt;Vehiculo&gt;, capacidad: int, indice: int): int
++estaLaPatenteEnLista(patente: String, listaVehiculos: List&lt;Vehiculo&gt;): boolean
++buscarPosicionDePatente(listaVehiculos: List&lt;Vehiculo&gt;, patente: String): int
++buscarPorTipoDeVehiculo(listaVehiculos: List&lt;Vehiculo&gt;, tipo: String, indice: int): int
++buscarYMostrarUnaPatente(leer: Scanner, listaVehiculos: List&lt;Vehiculo&gt;): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>280</y><w>400</w><h>192</h></coordinates><panel_attributes>IngresoYValidacion
+--
++ingreso(leer: Scanner ):int
++esEnteroValido(numero:int , min:int. max:int):boolean
++ingresarSiNo(leer: Scanner , mensaje:String):boolean
++ingresarCadena(leer: Scanner, minLetras:int. maxLetras:int, mensajeIngreso:String, mensajeError:String ):String
++ingresarEntero(leer: Scanner, valorMin:int, valorMax:int, mensajeIngreso:String, mensajeError:String):int
++ingresarTipoDeCombustible(leer: Scanner ):TiposDeMotor 
++esPatenteValida(patente:String):boolean
++ingresarPatente(leer: Scanner ):String
++nuevoVehiculo(Sleer: Scanner, opcion:int, listaVehiculos: List&lt;Vehiculo&gt;):Vehiculo 
++cargarNuevoVehiculo(leer: Scanner , opcion:int, listaVehiculos: List&lt;Vehiculo&gt;, patente:String):Vehiculo 
++ingresarUnEnteroPositivo(leer: Scanner, mensajeIngreso:String, mensajeError:String):int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>448</x><y>576</y><w>344</w><h>128</h></coordinates><panel_attributes>ServiciosTuristicos
+--
++servicioTuristico(listaVehiculos:List&lt;Vehiculo&gt; , leer:Scanner):void 
+
++mostrarSevicio(leer:Scanner ,listaDeDisponibles: List&lt;Vehiculo&gt; ):void 
+
++vehiculosParaContratar(listaVehiculos:List&lt;Vehiculo&gt; , 
+tipoVehiculo:String ):List&lt;Vehiculo&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>256</x><y>376</y><w>232</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;380;140;380;140;10;270;10</additional_attributes></element><element><id>Relation</id><coordinates><x>256</x><y>352</y><w>232</w><h>192</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;220;80;220;80;10;270;10</additional_attributes></element><element><id>Relation</id><coordinates><x>256</x><y>312</y><w>232</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;70;50;70;50;10;270;10</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>232</y><w>24</w><h>360</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;430</additional_attributes></element><element><id>Relation</id><coordinates><x>784</x><y>464</y><w>96</w><h>192</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;100;220;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>0</x><y>120</y><w>568</w><h>720</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>120;10;10;10;10;880;690;880;690;730</additional_attributes></element><element><id>Relation</id><coordinates><x>632</x><y>384</y><w>224</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>260;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>408</y><w>24</w><h>184</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>592</x><y>208</y><w>136</w><h>104</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>150;10;10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>944</x><y>464</y><w>24</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1008</x><y>464</y><w>24</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>400</y><w>336</w><h>168</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>400;190;10;190;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1104</x><y>192</y><w>168</w><h>360</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;190;10;190;430</additional_attributes></element><element><id>Relation</id><coordinates><x>408</x><y>40</y><w>320</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;380;10</additional_attributes></element><element><id>Relation</id><coordinates><x>256</x><y>768</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element></diagram>
