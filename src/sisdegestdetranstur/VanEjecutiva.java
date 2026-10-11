@@ -5,26 +5,20 @@
 package sisdegestdetranstur;
 
 /**
- *
+ * Clase hija de la clase Vehiculo. Contiene los atributos de la superclase y
+ * atributos propios, constructores, getters y setters, y el metodo abstracto
+ * que muestra la informacion de cada objeto de este tipo.
+ * 
  * @author bruch
  */
 public class VanEjecutiva extends Vehiculo{
     private boolean tieneAireAcondicionado;
 
-    /**
-     * Constructor del objeto VanEjecutiva
-     * @param tieneAireAcondicionado
-     * @param patente
-     * @param marca
-     * @param capacidadPasajeros
-     * @param anioFabricacion 
-     */
 
     public VanEjecutiva(boolean tieneAireAcondicionado, String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
         super(patente, marca, capacidadPasajeros, anioFabricacion, tipoVehiculo);
         this.tieneAireAcondicionado = tieneAireAcondicionado;
     }
-
 
 
     // Getters y Setters

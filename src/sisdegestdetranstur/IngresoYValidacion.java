@@ -14,30 +14,6 @@ import java.util.List;
  */
 
 public class IngresoYValidacion {
-
-    /**
-     * Bandeja principal con el menu de opciones que se ve por consola, que pide
-     * el ingreso de un entero con un menú de 8 opciones definidos con valores
-     * enteros.
-     *
-     * @return Devuelve un valor entero entre 1 y 8 representando una opcion.
-     */
-    public static int menu(Scanner leer) {
-        int opcion;
-        System.out.println("SISTEMA DE GESTION DE TRANSPORTE\n");
-        System.out.println("MENU");
-        System.out.println("1- Agregar vehiculo");
-        System.out.println("2- Mostrar todos los vehiculos");
-        System.out.println("3- Realizar servicios turisticos");
-        System.out.println("4- Buscar vehiculo por patente");
-        System.out.println("5- Mostrar vehiculos con capacidad mayor a: ");
-        System.out.println("6- Mostrar vehiculos por anio de fabricacion");
-        System.out.println("7- Mostrar vehiculos ordenados por capacidad de pasajeros descendente ");
-        System.out.println("8- Salir");
-        opcion = ingreso(leer);
-        return opcion;
-    }
-
     /**
      * Lee lo ingresado por consola, realizando las validaciones
      * correspondientes dentro del rango de 1 al 8 en valor entero
@@ -227,7 +203,7 @@ public class IngresoYValidacion {
      */
     public static String ingresarPatente(Scanner leer){
         String patente;
-        boolean esValida = false;
+        boolean esValida;
         do {            
             System.out.println("Ingresar patente con formato -AA123AA- o -AAA123-\nIngrese: ");
             patente = leer.nextLine().trim().toUpperCase();
@@ -244,7 +220,22 @@ public class IngresoYValidacion {
         return patente;
     }
     
-    
+    /**
+     * Metodo encargado de pedir por consola al usuario que escoga las opciones
+     * y que ingrese la informacion necesaria para crear un nuevo Vehiculo. Al
+     * finalizar de manera correcta, muestra un mensaje de carga correcta, 
+     * caso contrario mostrara un error y pedira corrección. Si la lista está 
+     * vacía, crea el objeto. De haber objetos en la lista, evalua si hay patentes
+     * existentes.
+     * 
+     * @param leer Tipo Scanner. Utilitario para guardar lo ingresado por consola.
+     * @param opcion Tipo entero. Representa la eleccion del usuario, si desea crear
+     *          1- Colectivo. 2- Lancha. 3- Van
+     * @param listaVehiculos Tipo lista de Vehiculo. Lista donde se buscara la patente
+     * ingresada por el usuario. De encontrar una patente, interrumple la carga y devuelve al usuario al menú
+     * 
+     * @return Devuelve un nuevo objeto de tipo Vehiculo, o devuelve null.
+     */
     public static Vehiculo nuevoVehiculo(Scanner leer, int opcion, List<Vehiculo> listaVehiculos) {
 
         Vehiculo nuevoVehiculo = null;
@@ -266,36 +257,60 @@ public class IngresoYValidacion {
         return nuevoVehiculo;
     }
     
-    public static Vehiculo cargarNuevoVehiculo(Scanner leer, int opcion, List<Vehiculo> listaVehiculos, String patente){
+    /**
+     * Metodo encargado de pedir al usuario los datos necesarios del vehiculo
+     * para poder crear el nuevo objeto.
+     * 
+     * @param leer Tipo Scanner. Utilitario para guardar lo ingresado por consola.
+     * @param opcion Tipo entero. Representa la eleccion del usuario, si desea crear
+     *          1- Colectivo. 2- Lancha. 3- Van
+     * @param listaVehiculos Tipo lista de Vehiculo. Lista donde se buscara la patente
+     * ingresada por el usuario. De encontrar una patente, interrumple la carga y devuelve al usuario al menú
+     * @param patente Tipo String. Patente verificada para crear el nuevo vehiculo.
+     * 
+     * @return devuelve un objeto de tipo Vehiculo.
+     */
+    public static Vehiculo cargarNuevoVehiculo(Scanner leer, int opcion , List<Vehiculo> listaVehiculos, String patente){
             int capacidad, anio;
             int anioActual = LocalDate.now().getYear();
-            Vehiculo nuevoVehiculo = null;
+            Vehiculo nuevoVehiculo ;
             String marca = ingresarCadena(leer, 1, 10, "Ingresa la marca del vehiculo: ", "Error, reingresa la marca: ");
 
             capacidad = ingresarEntero(leer, 10, 50, "Ingresa la capacidad del vehiculo: ", "Error, reingrese la capacidad: ");
             anio = ingresarEntero(leer, 1990, anioActual, "Ingresa el anio del vehiculo", "Anio fuera de rango, reingrese: ");
 
         switch (opcion) {
-            case 1:
+            case 1 -> {
                 int cantidadPisos = ingresarEntero(leer, 1, 2, "Ingrese cantidad de pisos\n1 piso\n2pisos\nIngrese: ", "Error, debe ingresar 1 o 2 pisos");
-                nuevoVehiculo = new ColectivoTuristico(cantidadPisos, patente, marca, capacidad, anioActual,"COLECTIVO");
+                nuevoVehiculo = new ColectivoTuristico(cantidadPisos, patente, marca, capacidad, anio,"COLECTIVO");
                 nuevoVehiculo = (ColectivoTuristico) nuevoVehiculo;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 TiposDeMotor combustible = ingresarTipoDeCombustible(leer);
                 nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anio, "LANCHA");
                 nuevoVehiculo = (LanchaTuristica) nuevoVehiculo;
-                break;
-            default:
+            }
+            default -> {
                 boolean tieneAire = ingresarSiNo(leer, "El vehiculo tiene aire acondicionado?\nSi - No: ");
-                nuevoVehiculo = new VanEjecutiva(tieneAire, patente, marca, capacidad, anioActual, "VAN");
+                nuevoVehiculo = new VanEjecutiva(tieneAire, patente, marca, capacidad, anio, "VAN");
                 nuevoVehiculo = (VanEjecutiva) nuevoVehiculo;
-                break;
+            }
         }
         
         return nuevoVehiculo;
     }
     
+    /**
+     * Metodo que se encarga de ingresar un entero por consola, lo valida que sea
+     * positivo mayor a 0 (cero) y lo devuelve. Tabien comprueba que no se ingresen
+     * caracteres.
+     * 
+     * @param leer Tipo Scanner. Utilitario para guardar lo ingresado por consola.
+     * @param mensajeIngreso tipo String. Mensaje que invita al usuario a ingresar un entero.
+     * @param mensajeError tipo String. Mensaje que advierte al usuario que ingreso un valor incorrecto.
+     * 
+     * @return devuelve un entero positivo.
+     */
     public static int ingresarUnEnteroPositivo(Scanner leer, String mensajeIngreso, String mensajeError){
         int ingreso = 0;
 

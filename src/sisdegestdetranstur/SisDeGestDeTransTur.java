@@ -29,10 +29,11 @@ public class SisDeGestDeTransTur {
         listaDeVehiculos.add(new ColectivoTuristico(2, "AF999ZZ", "Scania", 50, 2023, "COLECTIVO"));
         listaDeVehiculos.add(new VanEjecutiva(true, "AC111BB", "Mercedes", 14, 2019, "VAN"));
         listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.DIESEL, "XY888WZ", "Mercury", 22, 2012, "LANCHA"));
+        
         int opcion;
         //MENU
         do {
-            opcion = IngresoYValidacion.menu(leer);
+            opcion = ImprecionPorConsola.menu(leer);
             switch (opcion) {
                 case 1 -> {
                     // Agregar vehiculos
@@ -40,11 +41,11 @@ public class SisDeGestDeTransTur {
                     String mensajeError = "Error de ingreso. Ingrese opcion 1, 2 o 3";
                     int opcNuevoVehiculo = IngresoYValidacion.ingresarEntero(leer, 1, 3, mensaje, mensajeError);
                     Vehiculo nuevoVehiculo = IngresoYValidacion.nuevoVehiculo(leer, opcNuevoVehiculo, listaDeVehiculos);
-                    if (nuevoVehiculo != null){
+                    if (nuevoVehiculo != null) {
                         listaDeVehiculos.add(nuevoVehiculo);
                         System.out.println("El nuevo vehiculo se ingreso correctamente");
                     }
-                    
+
                 }
                 case 2 -> {
                     // Mostrar todos los vehiculos
@@ -61,34 +62,38 @@ public class SisDeGestDeTransTur {
                 }
                 case 4 -> {
                     // Buscar vehiculo por patente
-                    Buscadores.buscarUnaPatente(leer, listaDeVehiculos);
+                    Buscadores.buscarYMostrarUnaPatente(leer, listaDeVehiculos);
                 }
                 case 5 -> {
                     // Mostrar vehiculos con capacidad mayor a...}
                     String mensajeIngreso = "Ingrese la capacidad que busca: ";
                     String mensajeError = "Error, debe ingresar un numero positivo";
                     int capacidadIngresada = IngresoYValidacion.ingresarUnEnteroPositivo(leer, mensajeIngreso, mensajeError);
-                    ImprecionPorConsola.mostrarVehiculosConMayorCapacidad(listaDeVehiculos, capacidadIngresada);                
-                } 
+                    ImprecionPorConsola.mostrarVehiculosConMayorCapacidad(listaDeVehiculos, capacidadIngresada);
+                }
                 case 6 -> {
                     // Mostrar vehiculos por año de fabricacioón
                     ImprecionPorConsola.mostrarPorAnio(listaDeVehiculos);
                 }
                 case 7 -> {
                     //Mostrar vehiculos ordenados por capacidad de pasajeros descendente
-                    ImprecionPorConsola.mostrarPorCapacidadDes(listaDeVehiculos);
-                            
+                    ImprecionPorConsola.mostrarPorCapacidadDesendente(listaDeVehiculos);
+
                 }
-                case 8 -> 
+                case 8 ->
                     //Salir
                     System.out.println("Saliendo del programa");
-                default -> throw new AssertionError();
+                default ->
+                    throw new AssertionError();
             }
             pausarPantalla(leer);
         } while (opcion != 8);
     }
 
-
+    /**
+     * Utilitario para frenar la pantalla hasta presionar enter
+     * @param leer Tipo Scanner. Utilitario para leer lo ingresado por consola.
+     */
     public static void pausarPantalla(Scanner leer) {
         System.out.println("Presione ENTER para continuar...");
         leer.nextLine();

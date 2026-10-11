@@ -5,7 +5,8 @@
 package sisdegestdetranstur;
 
 /**
- *
+ * Clase abstracta de Vehiculo.
+ * 
  * @author bruch
  */
 public abstract class Vehiculo {
@@ -26,8 +27,6 @@ public abstract class Vehiculo {
         this.estaDisponible = true;
     }
     
-
-
 
     // -----------Getters y Setters-------------
     public String getPatente() {

@@ -5,7 +5,7 @@
 package sisdegestdetranstur;
 
 /**
- *
+ * Enum con los tipos de motor de las lanchas
  * @author bruch
  */
 public enum TiposDeMotor {
