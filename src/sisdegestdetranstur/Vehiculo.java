@@ -15,8 +15,10 @@ public abstract class Vehiculo {
     protected int capacidadPasajeros;
     protected int anioFabricacion;
     
-    /* NOTA: Se agregan estos dos atributos para poder generar una simulacion de servicio mas limpia y prolija, enfocado a una "reserva de vehiculo". Asi no solo se condiciona 
-*/
+    /* NOTA: Se agregan estos dos atributos para poder generar una simulacion 
+    de servicio mas limpia y prolija, enfocado a una "reserva de vehiculo". 
+    Asi no solo se condiciona por la capacidad de pasajeros si no que tambien 
+    si está disponible y por tipo de vehiculo*/
     protected boolean estaDisponible;
     protected String tipoVehiculo;
 
