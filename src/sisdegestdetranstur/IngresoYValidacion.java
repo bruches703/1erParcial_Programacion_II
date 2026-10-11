@@ -296,7 +296,26 @@ public class IngresoYValidacion {
         return nuevoVehiculo;
     }
     
+    public static int ingresarUnEnteroPositivo(Scanner leer, String mensajeIngreso, String mensajeError){
+        int ingreso = 0;
 
+        while (ingreso <=0) {
+            //Valida que el entero no tenga caracteres y que este dentro del rango
+            try {
+                System.out.println(mensajeIngreso);
+                ingreso = leer.nextInt();
+                if (ingreso <=0) {
+                    System.out.println(mensajeError);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error, ingrese un valor entero permitido: ");
+                leer.next();
+            }
+        }
+        leer.nextLine();
+       
+        return ingreso;
+    }
     
 
 }

@@ -20,9 +20,15 @@ public class SisDeGestDeTransTur {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         List<Vehiculo> listaDeVehiculos = new ArrayList<>();
-        listaDeVehiculos.add((ColectivoTuristico) new ColectivoTuristico(2, "ABC123", "FORD", 25, 2020, "COLECTIVO"));
-        listaDeVehiculos.add((VanEjecutiva) new VanEjecutiva(true, "AB123CD", "honda", 15, 2000, "VAN"));
-        listaDeVehiculos.add((LanchaTuristica) new LanchaTuristica(TiposDeMotor.DIESEL, "IR123LO", "yate cojo", 40, 2010, "LANCHA"));
+        listaDeVehiculos.add(new ColectivoTuristico(2, "ABC123", "FORD", 25, 2020, "COLECTIVO"));
+        listaDeVehiculos.add(new VanEjecutiva(true, "AB123CD", "honda", 15, 2000, "VAN"));
+        listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.DIESEL, "IR123LO", "yate cojo", 40, 2010, "LANCHA"));
+        listaDeVehiculos.add(new ColectivoTuristico(1, "AE456FG", "Mercedes", 45, 2018, "COLECTIVO"));
+        listaDeVehiculos.add(new VanEjecutiva(false, "JK789LM", "Toyota", 18, 2015, "VAN"));
+        listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.NAFTA, "ST321UV", "Yamaha", 18, 2022, "LANCHA"));
+        listaDeVehiculos.add(new ColectivoTuristico(2, "AF999ZZ", "Scania", 50, 2023, "COLECTIVO"));
+        listaDeVehiculos.add(new VanEjecutiva(true, "AC111BB", "Mercedes", 14, 2019, "VAN"));
+        listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.DIESEL, "XY888WZ", "Mercury", 22, 2012, "LANCHA"));
         int opcion;
         //MENU
         do {
@@ -58,13 +64,20 @@ public class SisDeGestDeTransTur {
                     Buscadores.buscarUnaPatente(leer, listaDeVehiculos);
                 }
                 case 5 -> {
-                    // Mostrar vehiculos con capacidad mayor a...
-                }
+                    // Mostrar vehiculos con capacidad mayor a...}
+                    String mensajeIngreso = "Ingrese la capacidad que busca: ";
+                    String mensajeError = "Error, debe ingresar un numero positivo";
+                    int capacidadIngresada = IngresoYValidacion.ingresarUnEnteroPositivo(leer, mensajeIngreso, mensajeError);
+                    ImprecionPorConsola.mostrarVehiculosConMayorCapacidad(listaDeVehiculos, capacidadIngresada);                
+                } 
                 case 6 -> {
                     // Mostrar vehiculos por año de fabricacioón
+                    ImprecionPorConsola.mostrarPorAnio(listaDeVehiculos);
                 }
                 case 7 -> {
                     //Mostrar vehiculos ordenados por capacidad de pasajeros descendente
+                    ImprecionPorConsola.mostrarPorCapacidadDes(listaDeVehiculos);
+                            
                 }
                 case 8 -> 
                     //Salir
@@ -77,7 +90,7 @@ public class SisDeGestDeTransTur {
 
 
     public static void pausarPantalla(Scanner leer) {
-        System.out.println("Presione una tecla para continuar...");
+        System.out.println("Presione ENTER para continuar...");
         leer.nextLine();
     }
 }

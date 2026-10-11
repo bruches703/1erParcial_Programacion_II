@@ -11,22 +11,12 @@ package sisdegestdetranstur;
 public class ColectivoTuristico extends Vehiculo{
     protected int cantidadPisos;
     
-    /**
-     * Constructor del objeto ColectivoTuristico
-     * @param cantidadPisos
-     * @param patente
-     * @param marca
-     * @param capacidadPasajeros
-     * @param anioFabricacion
-     * @param tipoVehiculo 
-     */
+    
     public ColectivoTuristico(int cantidadPisos, String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
         super(patente, marca, capacidadPasajeros, anioFabricacion, tipoVehiculo);
         this.cantidadPisos = cantidadPisos;
     }
-    
 
-    
     // Setter y Getter
     public int getCantidadPisos() {
         return cantidadPisos;

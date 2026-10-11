@@ -19,10 +19,13 @@ public class VanEjecutiva extends Vehiculo{
      * @param capacidadPasajeros
      * @param anioFabricacion 
      */
+
     public VanEjecutiva(boolean tieneAireAcondicionado, String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
         super(patente, marca, capacidadPasajeros, anioFabricacion, tipoVehiculo);
         this.tieneAireAcondicionado = tieneAireAcondicionado;
     }
+
+
 
     // Getters y Setters
     public boolean isTieneAireAcondicionado() {
@@ -79,9 +82,9 @@ public class VanEjecutiva extends Vehiculo{
     public void mostrarInformacion() {
         String tieneAire;
         if(this.tieneAireAcondicionado){
-            tieneAire = "SI";
+            tieneAire = "TIENE AIRE";
         } else {
-            tieneAire = "NO";
+            tieneAire = "NO TIENE AIRE";
         }
         
         System.out.printf(" Van ejec.|  %-8s | %-10s | Capacidad: %-3d pas.   | Año: %-4d | %-2s\n", 

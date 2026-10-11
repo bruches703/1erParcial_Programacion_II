@@ -37,8 +37,9 @@ public class ServiciosTuristicos {
                 }
                 case "3", "VAN" -> {
                     listaDeDisponibles = vehiculosParaContratar(listaVehiculos, "VAN");
-                    System.out.println("Valor ingresado. Reingrese...");
+                    esValido = true;
                 }
+            
             }
         } while (!esValido);
 
@@ -55,14 +56,32 @@ public class ServiciosTuristicos {
         System.out.println("Ingrese destino: ");
         String destino = leer.nextLine();
         int cantidadPersonas = IngresoYValidacion.ingresarEntero(leer, 1, 60, "Ingrese la cantidad de pasajeros: ", "Error de ingreso, el valor no puede ser negativo ni mayor a" + 60);
+        
         for (int i = 0; i < listaDeDisponibles.size(); i++) {
-            if (Buscadores.buscarPorCapacidad(listaDeDisponibles, cantidadPersonas, i) != -1) {
+            Vehiculo vehiculoAuxiliar = listaDeDisponibles.get(i);
+            boolean vehiculoDisponible = (vehiculoAuxiliar.getCapacidadPasajeros() >= cantidadPersonas) && vehiculoAuxiliar.isEstaDisponible();
+            if ( vehiculoDisponible) {
 
-                System.out.println("Vehiculo contratado. Datos del vehiculo");
-                listaDeDisponibles.get(i).mostrarInformacion();
-                System.out.println("Datos de la contratacion: ");
-                System.out.println("Punto de partida: " + partida + "Destino: " + destino + "\nPasajeros: " + cantidadPersonas);
-                hayVehiculosApto = true;
+                if (!hayVehiculosApto) {
+                    System.out.println("Datos de la contratacion: ");
+                    System.out.println("Punto de partida: " + partida + "Destino: " + destino + "\nPasajeros: " + cantidadPersonas);
+                    System.out.println("Vehiculo contratado");
+                    hayVehiculosApto = true;
+                    System.out.println();
+                    
+                    boolean esSi = IngresoYValidacion.ingresarSiNo(leer, "Desea contratar? Si - NO: " );
+                    if(esSi){
+                        System.out.println("Datos del vehiculo");
+                        listaDeDisponibles.get(i).mostrarInformacion();
+                        listaDeDisponibles.get(i).setEstaDisponible(false);
+                        return;
+                    } else{
+                        System.out.println("Servicio cancelado, volviendo al menu");
+                        return;
+                    }
+                }
+                
+
             }
 
         }
@@ -71,17 +90,19 @@ public class ServiciosTuristicos {
         }
     }
 
-    public static List<Vehiculo> vehiculosParaContratar(List<Vehiculo> listaVehiculos, String opcion) {
+    public static List<Vehiculo> vehiculosParaContratar(List<Vehiculo> listaVehiculos, String tipoVehiculo) {
+        List<Vehiculo> vehiculosDisponibles = new ArrayList<>();
         if (listaVehiculos.isEmpty()) {
-            return null;
+            return vehiculosDisponibles;
         }
 
-        List<Vehiculo> vehiculosDisponibles = new ArrayList<>();
-        for (int i = 0; i < listaVehiculos.size(); i++) {
-            if (Buscadores.buscarPorTipoDeVehiculo(listaVehiculos, opcion, i) != 0) {
-                vehiculosDisponibles.add(listaVehiculos.get(i));
-            }
+        
+        for (Vehiculo vehiculo : listaVehiculos) {
+        
+        if (vehiculo.getTipoVehiculo().equalsIgnoreCase(tipoVehiculo) && vehiculo.isEstaDisponible()) {
+            vehiculosDisponibles.add(vehiculo);
         }
+    }
         return vehiculosDisponibles;
     }
 

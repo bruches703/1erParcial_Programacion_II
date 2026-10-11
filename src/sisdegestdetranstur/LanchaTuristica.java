@@ -33,8 +33,6 @@ public class LanchaTuristica extends Vehiculo {
         this.tipoVehiculo = tipoVehiculo;
     }
 
-    
-
     public TiposDeMotor getTipoDeCombustible() {
         return tipoDemotor;
     }

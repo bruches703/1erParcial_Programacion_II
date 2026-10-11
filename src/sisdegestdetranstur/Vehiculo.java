@@ -13,6 +13,8 @@ public abstract class Vehiculo {
     protected String marca;
     protected int capacidadPasajeros;
     protected int anioFabricacion;
+    
+    protected boolean estaDisponible;
     protected String tipoVehiculo;
 
     public Vehiculo(String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
@@ -21,6 +23,7 @@ public abstract class Vehiculo {
         this.capacidadPasajeros = capacidadPasajeros;
         this.anioFabricacion = anioFabricacion;
         this.tipoVehiculo = tipoVehiculo;
+        this.estaDisponible = true;
     }
     
 
@@ -65,6 +68,14 @@ public abstract class Vehiculo {
 
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public boolean isEstaDisponible() {
+        return estaDisponible;
+    }
+
+    public void setEstaDisponible(boolean estaDisponible) {
+        this.estaDisponible = estaDisponible;
     }
     
     
