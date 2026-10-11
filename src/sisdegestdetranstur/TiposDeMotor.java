@@ -8,7 +8,7 @@ package sisdegestdetranstur;
  *
  * @author bruch
  */
-public enum TipoDeCombustible {
+public enum TiposDeMotor {
     NAFTA,
     DIESEL,
     ELECTRICO

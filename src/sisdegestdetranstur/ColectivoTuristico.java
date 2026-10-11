@@ -9,16 +9,35 @@ package sisdegestdetranstur;
  * @author bruch
  */
 public class ColectivoTuristico extends Vehiculo{
-    private int cantidadPisos;
-
-    public ColectivoTuristico(int cantidadPisos, String patente, String marca, int capacidadPasajeros, int anioFabricacion) {
-        super(patente, marca, capacidadPasajeros, anioFabricacion);
+    protected int cantidadPisos;
+    
+    /**
+     * Constructor del objeto ColectivoTuristico
+     * @param cantidadPisos
+     * @param patente
+     * @param marca
+     * @param capacidadPasajeros
+     * @param anioFabricacion
+     * @param tipoVehiculo 
+     */
+    public ColectivoTuristico(int cantidadPisos, String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
+        super(patente, marca, capacidadPasajeros, anioFabricacion, tipoVehiculo);
         this.cantidadPisos = cantidadPisos;
     }
+    
+
     
     // Setter y Getter
     public int getCantidadPisos() {
         return cantidadPisos;
+    }
+
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 
     public void setCantidadPisos(int cantidadPisos) {
@@ -28,7 +47,7 @@ public class ColectivoTuristico extends Vehiculo{
 
     @Override
     public void mostrarInformacion() {
-        System.out.printf("Colectivo | Patente: %-8s | Marca: %-10s | Capacidad: %-3d pas. | Año: %-4d | Pisos: %-2d piso/s\n", 
+        System.out.printf("Colectivo |  %-8s | %-10s | Capacidad: %-3d pas.   | Año: %-4d | Pisos: %-2d piso/s\n", 
                 this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, this.cantidadPisos);
     }
          

@@ -13,13 +13,19 @@ public abstract class Vehiculo {
     protected String marca;
     protected int capacidadPasajeros;
     protected int anioFabricacion;
+    protected String tipoVehiculo;
 
-    public Vehiculo(String patente, String marca, int capacidadPasajeros, int anioFabricacion) {
+    public Vehiculo(String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
         this.patente = patente;
         this.marca = marca;
         this.capacidadPasajeros = capacidadPasajeros;
         this.anioFabricacion = anioFabricacion;
+        this.tipoVehiculo = tipoVehiculo;
     }
+    
+
+
+
     // -----------Getters y Setters-------------
     public String getPatente() {
         return patente;

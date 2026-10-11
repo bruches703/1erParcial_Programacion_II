@@ -9,21 +9,40 @@ package sisdegestdetranstur;
  * @author bruch
  */
 public class LanchaTuristica extends Vehiculo {
-    private final TipoDeCombustible tipoDeCombustible;
+    private final TiposDeMotor tipoDemotor;
 
-    public LanchaTuristica(TipoDeCombustible tipoDeCombustible, String patente, String marca, int capacidadPasajeros, int anioFabricacion) {
-        super(patente, marca, capacidadPasajeros, anioFabricacion);
-        this.tipoDeCombustible = tipoDeCombustible;
+    /**
+     * Constructor del objeto LanchaTuristica
+     * @param tipoDemotor
+     * @param patente
+     * @param marca
+     * @param capacidadPasajeros
+     * @param anioFabricacion
+     * @param tipoVehiculo 
+     */
+    public LanchaTuristica(TiposDeMotor tipoDemotor, String patente, String marca, int capacidadPasajeros, int anioFabricacion, String tipoVehiculo) {
+        super(patente, marca, capacidadPasajeros, anioFabricacion, tipoVehiculo);
+        this.tipoDemotor = tipoDemotor;
     }
 
-    public TipoDeCombustible getTipoDeCombustible() {
-        return tipoDeCombustible;
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+
+    
+
+    public TiposDeMotor getTipoDeCombustible() {
+        return tipoDemotor;
     }
     
     @Override
     public void mostrarInformacion() {
-        System.out.printf("Colectivo | Patente: %-8s | Marca: %-10s | Capacidad: %-3d pas. | Año: %-4d | %-9s\n", 
-                this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, this.tipoDeCombustible);
+        System.out.printf(" Lancha   |  %-8s | %-10s | Capacidad: %-3d pas.   | Año: %-4d | %-9s\n", 
+                this.patente, this.marca, this.capacidadPasajeros, this.anioFabricacion, this.tipoDemotor);
     }
     
 }

@@ -20,6 +20,9 @@ public class SisDeGestDeTransTur {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         List<Vehiculo> listaDeVehiculos = new ArrayList<>();
+        listaDeVehiculos.add((ColectivoTuristico) new ColectivoTuristico(2, "ABC123", "FORD", 25, 2020, "COLECTIVO"));
+        listaDeVehiculos.add((VanEjecutiva) new VanEjecutiva(true, "ab123cd", "honda", 15, 2000, "VAN"));
+        listaDeVehiculos.add((LanchaTuristica) new LanchaTuristica(TiposDeMotor.DIESEL, "ir123lo", "yate cojo", 40, 2010, "LANCHA"));
         int opcion;
         //MENU
         do {
@@ -30,8 +33,7 @@ public class SisDeGestDeTransTur {
                     String mensaje = "Escoja tipo de vehiculo:\n1-Colectivo\n2-Lancha\n3-Van\nIngrese opcion: ";
                     String mensajeError = "Error de ingreso. Ingrese opcion 1, 2 o 3";
                     int opcNuevoVehiculo = IngresoYValidacion.ingresarEntero(leer, 1, 3, mensaje, mensajeError);
-                    leer.nextLine(); // Limpiar el buffer para que lo residual no guarde
-                    Vehiculo nuevoVehiculo = IngresoYValidacion.nuevoVehiculo(leer, opcNuevoVehiculo);
+                    Vehiculo nuevoVehiculo = IngresoYValidacion.nuevoVehiculo(leer, opcNuevoVehiculo, listaDeVehiculos);
                     if (nuevoVehiculo != null){
                         listaDeVehiculos.add(nuevoVehiculo);
                         System.out.println("El nuevo vehiculo se ingreso correctamente");
@@ -43,12 +45,11 @@ public class SisDeGestDeTransTur {
                     if (listaDeVehiculos.isEmpty()) {
                         System.out.println("\nLista vacia");
                     } else {
-                        IngresoYValidacion.mostrarVehiculos(listaDeVehiculos);
+                        System.out.println(" Vehiculo |  Patente  |   Marca    |  Cant. de pasajeros   | Año fab.  | Dato especifico ");
+                        System.out.println("----------|-----------|------------|-----------------------|------------|---------------------");
+                        ImprecionPorConsola.mostrarVehiculos(listaDeVehiculos);
                     }
                     System.out.println("Presione una tecla para continuar...");
-                    //Para congelar la pantalla y pedir que precione enter para continuar, se agrega dos
-                    //leer.nextLine porque queda el buffer queda con datos pendientes y utiliza el primero
-                    leer.nextLine();
                     leer.nextLine();
                 }
                 case 3 -> {

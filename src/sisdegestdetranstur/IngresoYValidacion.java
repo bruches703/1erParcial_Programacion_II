@@ -94,9 +94,8 @@ public class IngresoYValidacion {
         String ingreso; // ingreso del usuario a validar
         
         do{
-            leer.next();
             System.out.println(mensaje);
-            ingreso = leer.nextLine().toUpperCase();
+            ingreso = leer.nextLine().trim().toUpperCase();
 
             if(ingreso.equals("SI")){
                 resultado = true;
@@ -169,6 +168,7 @@ public class IngresoYValidacion {
                 System.out.println("Error, ingrese un valor entero permitido: ");
             }
         }
+        leer.nextLine();
         return ingreso;
     }
 
@@ -179,11 +179,11 @@ public class IngresoYValidacion {
      *
      * @param leer tipo Scanner. Lee el ingreso del usuario por consola
      *
-     * @return Devuelve un objeto TipoDeCombustible tipo Enum
+     * @return Devuelve un objeto TiposDeMotor tipo Enum
      */
-    public static TipoDeCombustible ingresarTipoDeCombustible(Scanner leer) {
+    public static TiposDeMotor ingresarTipoDeCombustible(Scanner leer) {
         String tipoCombustible;
-        TipoDeCombustible combustible = null;
+        TiposDeMotor combustible = null;
         boolean flag = true;
 
         do {
@@ -193,7 +193,7 @@ public class IngresoYValidacion {
             tipoCombustible = leer.nextLine().trim().toUpperCase();
 
             try {
-                combustible = TipoDeCombustible.valueOf(tipoCombustible);
+                combustible = TiposDeMotor.valueOf(tipoCombustible);
                 flag = false;
             } catch (IllegalArgumentException e) {
                 System.out.println("Error, el combustible ingresado no existe. Reingrese.");
@@ -202,37 +202,108 @@ public class IngresoYValidacion {
         } while (flag);
         return combustible;
     }
+    
+    /**
+     * Compara la patente ingresada por consola y la compara con los formatos:
+     * 2Letras - 3Numeros - 2Letras
+     * 3Letras - 3 Numeros
+     * @param patente Tipo String. Patente ingresada por el usuario.
+     * @return Devuelve true si el usuario ingreso formato correcto de patente,
+     * de lo contrario retorna false.
+     */
+    public static boolean esPatenteValida(String patente){
+        String formatoPateneUno = "^[A-Z]{2}[0-9]{3}[A-Z]{2}$"; // Ejemplo: AA222AA
+        String formatoPatenteDos = "^[A-Z]{3}[0-9]{3}$"; // Ejemplo AAA222
+        return patente.toUpperCase().matches(formatoPateneUno) || patente.toUpperCase().matches(formatoPatenteDos) ;
+    }
+    
+    /**
+     * Ingresa la patente nueva por consola, se valida en el formato AA123AA o
+     * AAA123.
+     * 
+     * @param leer Tipo Scanner. Herramienta para guardar lo ingresado en la consola
+     * 
+     * @return Devuelve la patente ingresada correctamente en el formato requerido
+     */
+    public static String ingresarPatente(Scanner leer){
+        String patente;
+        boolean esValida = false;
+        do {            
+            System.out.println("Ingresar patente con formato -AA123AA- o -AAA123-\nIngrese: ");
+            patente = leer.nextLine().trim().toUpperCase();
+            esValida = esPatenteValida(patente);
+            if(!esValida){
+                System.out.println("Error de formato. Reingrese.");
+            }else if(patente.equals("")){
+                System.out.println("Error, la patente no puede ser vacia. Reingrese");
+            } else{
+                System.out.println("Patente: " + patente);
+            }
+        } while (!esValida);
+        
+        return patente;
+    }
+    
+    
+    public static Vehiculo nuevoVehiculo(Scanner leer, int opcion, List<Vehiculo> listaVehiculos) {
 
-    public static Vehiculo nuevoVehiculo(Scanner leer, int opcion){
         Vehiculo nuevoVehiculo = null;
-        String patente, marca;
-        int capacidad, anio, anioActual = LocalDate.now().getYear();
         
-        patente = ingresarCadena(leer, 3, 6, "Ingresa la patente, entre 3 y caracteres: ", "Error, reingresa la patente: ");
-        marca = ingresarCadena(leer, 1, 10, "Ingresa la marca del vehiculo: ", "Error, reingresa la marca: ");
-        
-        capacidad = ingresarEntero(leer, 10, 50, "Ingresa la capacidad del vehiculo: ", "Error, reingrese la capacidad: ");
-        anio = ingresarEntero(leer, 1990, anioActual, "Ingresa el anio del vehiculo", "Anio fuera de rango, reingrese: ");
-        
-        if(opcion == 1){
-            int cantidadPisos = ingresarEntero(leer, 1, 2, "Ingrese cantidad de pisos\n1 piso\n2pisos\nIngrese: ", "Error, debe ingresar 1 o 2 pisos");
-            nuevoVehiculo = new ColectivoTuristico(cantidadPisos, patente, marca, capacidad, anioActual);
-            nuevoVehiculo = (ColectivoTuristico) nuevoVehiculo;
-        } else if(opcion == 2){
-            TipoDeCombustible combustible = ingresarTipoDeCombustible(leer);
-            nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anio);
-            nuevoVehiculo = (LanchaTuristica) nuevoVehiculo;
+        if (listaVehiculos.isEmpty()) {            
+            String patente = ingresarPatente(leer);
+            nuevoVehiculo = cargarNuevoVehiculo(leer, opcion, listaVehiculos, patente);
+            System.out.println("Carga de vehiculo exitosa");           
         } else {
-            boolean tieneAire = ingresarSiNo(leer, "El vehiculo tiene aire acondicionado?\nSi - No: ");
-            nuevoVehiculo = new VanEjecutiva(tieneAire, patente, marca, capacidad, anioActual);
-            nuevoVehiculo = (VanEjecutiva) nuevoVehiculo;
+            String patente = ingresarPatente(leer);
+            if(estaLaPatenteEnLista(patente, listaVehiculos)){
+                System.out.println("Error, La patente ya se encuentra cargada. Cancelando carga");
+            } else {
+                nuevoVehiculo = cargarNuevoVehiculo(leer, opcion, listaVehiculos, patente);
+                System.out.println("Carga de vehiculo exitosa");
+            }
         }
+
         return nuevoVehiculo;
     }
     
-    public static void mostrarVehiculos(List<Vehiculo> listaVehiculos){
-        for (Vehiculo vehiculo : listaVehiculos) {
-            vehiculo.mostrarInformacion();
+    public static Vehiculo cargarNuevoVehiculo(Scanner leer, int opcion, List<Vehiculo> listaVehiculos, String patente){
+            int capacidad, anio;
+            int anioActual = LocalDate.now().getYear();
+            Vehiculo nuevoVehiculo = null;
+            String marca = ingresarCadena(leer, 1, 10, "Ingresa la marca del vehiculo: ", "Error, reingresa la marca: ");
+
+            capacidad = ingresarEntero(leer, 10, 50, "Ingresa la capacidad del vehiculo: ", "Error, reingrese la capacidad: ");
+            anio = ingresarEntero(leer, 1990, anioActual, "Ingresa el anio del vehiculo", "Anio fuera de rango, reingrese: ");
+
+        switch (opcion) {
+            case 1:
+                int cantidadPisos = ingresarEntero(leer, 1, 2, "Ingrese cantidad de pisos\n1 piso\n2pisos\nIngrese: ", "Error, debe ingresar 1 o 2 pisos");
+                nuevoVehiculo = new ColectivoTuristico(cantidadPisos, patente, marca, capacidad, anioActual,"COLECTIVO");
+                nuevoVehiculo = (ColectivoTuristico) nuevoVehiculo;
+                break;
+            case 2:
+                TiposDeMotor combustible = ingresarTipoDeCombustible(leer);
+                nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anio, "LANCHA");
+                nuevoVehiculo = (LanchaTuristica) nuevoVehiculo;
+                break;
+            default:
+                boolean tieneAire = ingresarSiNo(leer, "El vehiculo tiene aire acondicionado?\nSi - No: ");
+                nuevoVehiculo = new VanEjecutiva(tieneAire, patente, marca, capacidad, anioActual, "VAN");
+                nuevoVehiculo = (VanEjecutiva) nuevoVehiculo;
+                break;
         }
+        
+        return nuevoVehiculo;
     }
+    
+    public static boolean estaLaPatenteEnLista(String patente, List<Vehiculo> listaVehiuculos){
+        for (Vehiculo vehiculo : listaVehiuculos) {
+            if(vehiculo.getPatente().equals(patente)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+
 }
