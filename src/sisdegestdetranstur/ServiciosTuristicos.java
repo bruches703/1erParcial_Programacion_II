@@ -86,7 +86,7 @@ public class ServiciosTuristicos {
 
                 if (!hayVehiculoApto) {
                     //Ingreso del resto de los datos.
-                    System.out.println("Datos de la contratacion: ");
+                    System.out.println("Datos del Servicio: ");
                     System.out.println("Punto de partida: " + partida + "Destino: " + destino + "\nPasajeros: " + cantidadPersonas);
                     System.out.println("Vehiculo contratado");
                     hayVehiculoApto = true;

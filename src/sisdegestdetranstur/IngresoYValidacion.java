@@ -280,16 +280,19 @@ public class IngresoYValidacion {
             anio = ingresarEntero(leer, 1990, anioActual, "Ingresa el anio del vehiculo", "Anio fuera de rango, reingrese: ");
 
         switch (opcion) {
+            //Si es colectivo
             case 1 -> {
-                int cantidadPisos = ingresarEntero(leer, 1, 2, "Ingrese cantidad de pisos\n1 piso\n2pisos\nIngrese: ", "Error, debe ingresar 1 o 2 pisos");
+                int cantidadPisos = ingresarEntero(leer, 1, 2, "Ingrese cantidad de pisos\n1 piso\n2 pisos\nIngrese: ", "Error, debe ingresar 1 o 2 pisos");
                 nuevoVehiculo = new ColectivoTuristico(cantidadPisos, patente, marca, capacidad, anio,"COLECTIVO");
                 nuevoVehiculo = (ColectivoTuristico) nuevoVehiculo;
             }
+            //Si es Lancha
             case 2 -> {
                 TiposDeMotor combustible = ingresarTipoDeCombustible(leer);
                 nuevoVehiculo = new LanchaTuristica(combustible, patente, marca, capacidad, anio, "LANCHA");
                 nuevoVehiculo = (LanchaTuristica) nuevoVehiculo;
             }
+            //Si es Van
             default -> {
                 boolean tieneAire = ingresarSiNo(leer, "El vehiculo tiene aire acondicionado?\nSi - No: ");
                 nuevoVehiculo = new VanEjecutiva(tieneAire, patente, marca, capacidad, anio, "VAN");

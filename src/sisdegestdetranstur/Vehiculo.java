@@ -5,7 +5,7 @@
 package sisdegestdetranstur;
 
 /**
- * Clase abstracta de Vehiculo.
+ * Clase abstracta de vehiculo.
  * 
  * @author bruch
  */
@@ -15,6 +15,8 @@ public abstract class Vehiculo {
     protected int capacidadPasajeros;
     protected int anioFabricacion;
     
+    /* NOTA: Se agregan estos dos atributos para poder generar una simulacion de servicio mas limpia y prolija, enfocado a una "reserva de vehiculo". Asi no solo se condiciona 
+*/
     protected boolean estaDisponible;
     protected String tipoVehiculo;
 
