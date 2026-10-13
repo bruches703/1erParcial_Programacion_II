@@ -2,8 +2,11 @@
 Segundo cuatrimestre 2026.
 
 Alumno: Bruches, David Emanuel.
+
 Legajo: 66680
+
 Turno: noche
+
 Curso: 325
 
 NOTA: Se agregan estos dos atributos para poder generar una simulación de servicio mas limpia y prolija. 
