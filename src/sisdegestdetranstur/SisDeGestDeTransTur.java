@@ -22,7 +22,7 @@ public class SisDeGestDeTransTur {
         List<Vehiculo> listaDeVehiculos = new ArrayList<>();
         listaDeVehiculos.add(new ColectivoTuristico(2, "ABC123", "FORD", 25, 2020, "COLECTIVO"));
         listaDeVehiculos.add(new VanEjecutiva(true, "AB123CD", "honda", 15, 2000, "VAN"));
-        listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.DIESEL, "IR123LO", "yate cojo", 40, 2010, "LANCHA"));
+        listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.DIESEL, "IR123LO", "Yamaha", 40, 2010, "LANCHA"));
         listaDeVehiculos.add(new ColectivoTuristico(1, "AE456FG", "Mercedes", 45, 2018, "COLECTIVO"));
         listaDeVehiculos.add(new VanEjecutiva(false, "JK789LM", "Toyota", 18, 2015, "VAN"));
         listaDeVehiculos.add(new LanchaTuristica(TiposDeMotor.NAFTA, "ST321UV", "Yamaha", 18, 2022, "LANCHA"));
